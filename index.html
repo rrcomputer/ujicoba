@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencatatan Servis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- Tambahkan Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <h1>Pencatatan Servis</h1>
+    <button id="newServiceButton">
+        <i class="fas fa-plus"></i>
+        Servis Baru
+    </button>
+
+    <!-- Modal untuk form -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="serviceForm">
+                <input type="text" id="serviceNumber" name="serviceNumber" readonly>
+                <label for="customerName">Nama Pelanggan:</label>
+                <input type="text" id="customerName" name="customerName" list="customerList" required title="Ketik atau pilih nama pelanggan yang sudah tersimpan">
+                <datalist id="customerList"></datalist>
+                <label for="phoneNumber">Nomor HP:</label>
+                <div class="phone-input">
+                    <input type="text" id="phoneNumber" name="phoneNumber" required>
+                    <span class="copy-icon" onclick="copyPhoneNumber()">
+                        <i class="fas fa-copy"></i>
+                    </span>
+                </div>
+                <div class="input-container">
+                    <label for="whatsappNumber">Nomor WhatsApp:</label>
+                    <div class="whatsapp-input">
+                        <span class="whatsapp-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </span>
+                        <input type="text" id="whatsappNumber" name="whatsappNumber" required>
+                    </div>
+                </div>
+                <label for="deviceType">Jenis Perangkat:</label>
+                <select id="deviceType" name="deviceType">
+                    <option value="hp">HP</option>
+                    <option value="laptop">Laptop</option>
+                    <option value="komputer">Komputer</option>
+                    <option value="printer">Printer</option>
+                </select>
+                <label for="description">Deskripsi Masalah:</label>
+                <textarea id="description" name="description" required></textarea>
+                <label for="serviceStatus">Status Servis:</label>
+                <select id="serviceStatus" name="serviceStatus">
+                    <option value="belum-check">Belum Check</option>
+                    <option value="sedang-check">Sedang Check</option>
+                    <option value="menunggu-sparepart">Menunggu Sparepart</option>
+                    <option value="selesai">Selesai</option>
+                </select>
+                <button type="submit">Catat Servis</button>
+                <button type="button" id="cancelButton">Batal</button>
+            </form>
+        </div>
+    </div>
+    <div id="serviceList">
+        <div class="table-controls">
+            <button id="toggleSearchButton"><i class="fas fa-search"></i></button>
+            <div class="search-container" id="searchContainer" style="max-width: 0; overflow: hidden;">
+                <input type="text" id="searchInput" placeholder="Cari berdasarkan Nomor Servis" onkeyup="searchService()">
+                <span class="search-icon"><i class="fas fa-search"></i></span>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nomor Servis</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Nomor HP</th>
+                    <th>Nomor WhatsApp</th>
+                    <th>Jenis Perangkat</th>
+                    <th>Deskripsi Masalah</th>
+                    <th>Status Servis</th>
+                    <th>Tanggal Masuk Servis</th>
+                    <th>Tanggal Garansi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="list"></tbody>
+        </table>
+    </div>
+    <script src="script/script.js"></script>
+</body>
+</html>
